@@ -1,0 +1,5 @@
+apiVersion: v2
+name: labels-and-annotaions
+description: A Helm library chart with common helpers
+type: library
+version: 0.1.0

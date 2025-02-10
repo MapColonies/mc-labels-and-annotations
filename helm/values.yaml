@@ -1,0 +1,3 @@
+monitoring:
+  path: "/metrics"
+  port: "80"
