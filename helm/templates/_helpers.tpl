@@ -1,5 +1,3 @@
-# templates/_helpers.tpl
-
 {{- define "libchart.labels" -}}
 app.kubernetes.io/name: {{ .Chart.Name }}
 app.kubernetes.io/instance: {{ .Release.Name }}
@@ -13,13 +11,6 @@ mapcolonies.io/environment: "{{ .Values.deployment.environment }}"
 mapcolonies.io/release-version: "{{ .Values.deployment.releaseVersion }}"
 mapcolonies.io/owner: "{{ .Values.deployment.owner }}"
 mapcolonies.io/gis-domain: "{{ .Values.deployment.gisDomain }}"
-{{- end }}
-
-{{- define "libchart.annotations" -}}
-checksum/configmap: "{{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}"
-prometheus.io/scrape: "true"
-prometheus.io/path: "{{ .Values.monitoring.path | default "/metrics" }}"
-prometheus.io/port: "{{ .Values.monitoring.port | default "80" }}"
 {{- end }}
 
 {{- define "libchart.validateLabelsAndAnnotations" -}}
