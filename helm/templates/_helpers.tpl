@@ -1,4 +1,4 @@
-{{- define "libchart.labels" -}}
+{{- define "mc-labels-and-annotations.labels" -}}
 app.kubernetes.io/name: {{ .Chart.Name }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 app.kubernetes.io/version: {{ .Chart.Version }}
@@ -13,7 +13,7 @@ mapcolonies.io/owner: "{{ .Values.deployment.owner }}"
 mapcolonies.io/gis-domain: "{{ .Values.deployment.gisDomain }}"
 {{- end }}
 
-{{- define "libchart.validateLabelsAndAnnotations" -}}
+{{- define "mc-labels-and-annotations.validateLabelsAndAnnotations" -}}
 
   {{- if not (has .Values.deployment.component (list "frontend" "backend" "database" "proxy-server" "cache-server" "infrastructure")) -}}
       {{- fail (printf "Invalid value for mapcolonies.io/component:") -}}
