@@ -15,8 +15,9 @@ dependencies:
     repository: oci://acrarolibotnonprod.azurecr.io/helm/infra
 ```
 
-Reference Helper Templates: In your Kubernetes manifest templates, incorporate the helper templates as needed.
-For example, to add standard labels:
+Reference Helper Templates: 
+You can use the helper templates in your Kubernetes manifest templates whenever you need.
+For instance, if you want to add labels:
 
 ```yaml
 metadata:
@@ -24,10 +25,4 @@ metadata:
     {{ include "mc-labels-and-annotations.labels" . | nindent 4 }}
   annotations:
     {{ include "mc-labels-and-annotations.annotations" . | nindent 4 }}
-```
-
-Do not forget to include the labels and annotations validation in the manifests:
-
-```yaml
-{{- include "mc-labels-and-annotations.validateLabelsAndAnnotations" . -}}
 ```
