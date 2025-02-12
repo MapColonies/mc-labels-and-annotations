@@ -12,7 +12,7 @@ In order to use this package and include the labels in your repo, add the packag
 dependencies:
   - name: mc-labels-and-annotations
     version: 0.1.0
-    repository: oci://acrarolibotnonprod.azurecr.io/helm/infra
+    repository: oci://artifactory.io/helm/infra
 ```
 
 Reference Helper Templates: 
