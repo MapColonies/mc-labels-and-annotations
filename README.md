@@ -1,12 +1,12 @@
 # mc-labels-and-annotations
 
 This repository contains a Helm chart designed to streamline the deployment of Kubernetes applications by
-providing predefined helper templates.
+providing predefined labels and annotations by helper templates.
 
 The `_helpers.tpl` file includes templates for standard Kubernetes labels, ensuring uniformity across deployments.
 
-## To utilize this Helm chart in your project:
-Include the Chart: Add this chart as a dependency in your project's Chart.yaml.
+## Usage:
+In order to use this package and include the labels in your repo, add the package as a dependency:
 
 ```yaml
 dependencies:

@@ -1,16 +1,24 @@
-{{- define "mc-labels-and-annotations.labels" -}}
+{{- define "mc-labels-and-annotations.generalLabels" -}}
 app.kubernetes.io/name: {{ .Chart.Name }}
-app.kubernetes.io/instance: {{ .Release.Name }}
-app.kubernetes.io/version: {{ .Chart.Version }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
-helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version }}
 app.kubernetes.io/created-by: "{{ .Values.deployment.createdBy }}"
-app.kubernetes.io/component: "{{ .Values.deployment.component }}"
 app.kubernetes.io/part-of: "{{ .Values.deployment.partOf }}"
 mapcolonies.io/environment: "{{ .Values.deployment.environment }}"
 mapcolonies.io/release-version: "{{ .Values.deployment.releaseVersion }}"
 mapcolonies.io/owner: "{{ .Values.deployment.owner }}"
 mapcolonies.io/gis-domain: "{{ .Values.deployment.gisDomain }}"
+{{- end }}
+
+{{- define "mc-labels-and-annotations.labels" -}}
+{{- include "mc-labels-and-annotations.generalLabels" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
+app.kubernetes.io/version: {{ .Chart.Version }}
+helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+app.kubernetes.io/component: "{{ .Values.deployment.component }}"
+{{- end }}
+
+{{- define "mc-labels-and-annotations.serviceLabels" -}}
+{{- include "mc-labels-and-annotations.generalLabels" . }}
 {{- end }}
 
 {{- define "mc-labels-and-annotations.validateLabelsAndAnnotations" -}}
