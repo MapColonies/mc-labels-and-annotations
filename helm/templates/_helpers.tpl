@@ -10,6 +10,7 @@ mapcolonies.io/gis-domain: "{{ .Values.mcMetadata.gisDomain }}"
 {{- end }}
 
 {{- define "mc-labels-and-annotations.labels" -}}
+{{- include "mc-labels-and-annotations.validateLabelsAndAnnotations" . }}
 {{- include "mc-labels-and-annotations.generalLabels" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 app.kubernetes.io/version: {{ .Chart.Version }}
