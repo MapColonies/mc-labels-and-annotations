@@ -25,3 +25,9 @@ metadata:
   annotations:
     {{ include "mc-labels-and-annotations.annotations" . | nindent 4 }}
 ```
+
+Do not forget to include the labels and annotations validation in the manifests:
+
+```yaml
+{{- include "mc-labels-and-annotations.validateLabelsAndAnnotations" . -}}
+```
