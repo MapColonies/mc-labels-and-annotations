@@ -21,6 +21,9 @@ app.kubernetes.io/component: "{{ .Values.deployment.component }}"
 {{- include "mc-labels-and-annotations.generalLabels" . }}
 {{- end }}
 
+{{- define "mc-labels-and-annotations.annotations" -}}
+{{- end }}
+
 {{- define "mc-labels-and-annotations.validateLabelsAndAnnotations" -}}
 
   {{- if not (has .Values.deployment.component (list "frontend" "backend" "database" "proxy-server" "cache-server" "infrastructure")) -}}

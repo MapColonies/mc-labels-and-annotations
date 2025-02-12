@@ -22,4 +22,6 @@ For example, to add standard labels:
 metadata:
   labels:
     {{ include "mc-labels-and-annotations.labels" . | nindent 4 }}
+  annotations:
+    {{ include "mc-labels-and-annotations.annotations" . | nindent 4 }}
 ```
