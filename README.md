@@ -1,12 +1,13 @@
 # mc-labels-and-annotations
 
-This repository contains a Helm chart designed to streamline the deployment of Kubernetes applications by
-providing predefined labels and annotations by helper templates.
+This Helm chart is maintained by MapColonies.
+It provides predefined labels and annotations through helper templates to streamline the deployment
+of Kubernetes applications.
 
-The `_helpers.tpl` file includes templates for standard Kubernetes labels, ensuring uniformity across deployments.
+The `_helpers.tpl` file includes teןאmplates for standard Kubernetes labels, ensuring uniformity across deployments.
 
 ## Usage:
-In order to use this package and include the labels in your repo, add the package as a dependency:
+To use this package and include the labels in your repository, add the package as a dependency:
 
 ```yaml
 dependencies:
@@ -15,9 +16,7 @@ dependencies:
     repository: oci://artifactory.io/helm/infra
 ```
 
-Reference Helper Templates: 
-You can use the helper templates in your Kubernetes manifest templates whenever you need.
-For instance, if you want to add labels:
+In your Kubernetes manifest templates, reference the helper templates to add labels and annotations:
 
 ```yaml
 metadata:
@@ -26,3 +25,22 @@ metadata:
   annotations:
     {{ include "mc-labels-and-annotations.annotations" . | nindent 4 }}
 ```
+
+To ensure the labels are properly generated, add the following values in your `values.yaml`
+
+```yaml
+mcMetadata:
+  name: "MichalApplication"
+  createdBy: "Michal" 
+  component: "infrastructure"
+  partOf: "Monitoring"
+  releaseVersion: "v1.1.0"
+  owner: "infra"
+  gisDomain: ""
+```
+
+## Validation:
+The chart includes validation logic to ensure that required label values are provided and arein the expected
+formats. For instance, it checks that fields like createdBy and partOf are not empty, and that component 
+matches one of the predefined categories such as "frontend", "backend", or "infrastructure".
+This validation helps maintain consistency and prevents deployment errors due to misconfigured labels.
