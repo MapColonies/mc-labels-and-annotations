@@ -3,7 +3,7 @@ app.kubernetes.io/name: {{ .Chart.Name }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 app.kubernetes.io/created-by: "{{ .Values.mcMetadata.createdBy }}"
 app.kubernetes.io/part-of: "{{ .Values.mcMetadata.partOf }}"
-mapcolonies.io/environment: "{{ .Values.mcMetadata.environment }}"
+mapcolonies.io/environment: "{{ .Values.global.environment }}"
 mapcolonies.io/release-version: "{{ .Values.mcMetadata.releaseVersion }}"
 mapcolonies.io/owner: "{{ .Values.mcMetadata.owner }}"
 mapcolonies.io/gis-domain: "{{ .Values.mcMetadata.gisDomain }}"
@@ -13,7 +13,7 @@ mapcolonies.io/gis-domain: "{{ .Values.mcMetadata.gisDomain }}"
 {{- include "mc-labels-and-annotations.validateLabelsAndAnnotations" . }}
 {{- include "mc-labels-and-annotations.generalLabels" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
-app.kubernetes.io/version: {{ .Chart.Version }}
+app.kubernetes.io/version: {{ .Chart.AppVersion }}
 helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version }}
 app.kubernetes.io/component: "{{ .Values.mcMetadata.component }}"
 {{- end }}
@@ -35,7 +35,7 @@ app.kubernetes.io/component: "{{ .Values.mcMetadata.component }}"
       {{- fail (printf "Invalid value for mapcolonies.io/gisDomain:") -}}
   {{- end -}}
 
-  {{- if not (has .Values.mcMetadata.environment (list "dev" "prod" "integration")) -}}
+  {{- if not (has .Values.global.environment (list "dev" "prod" "integration")) -}}
       {{- fail (printf "Invalid value for mapcolonies.io/environment:") -}}
   {{- end -}}
   
