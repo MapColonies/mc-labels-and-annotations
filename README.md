@@ -33,7 +33,6 @@ If a specific value exists outside `global`, it will override the global value f
 ```yaml
 general:
   mcMetadata:
-    name: "MichalApplication"
     createdBy: "Michal" 
     component: "infrastructure"
     partOf: "Monitoring"
