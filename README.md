@@ -26,7 +26,9 @@ metadata:
     {{ include "mc-labels-and-annotations.annotations" . | nindent 4 }}
 ```
 
-To ensure the labels are properly generated, add the following values in your `values.yaml`
+To ensure the labels are properly generated, define your metadata values in values.yaml.
+By default, the chart retrieves values from mcMetadata under global, ensuring consistent labeling across deployments.  
+If a specific value exists outside `global`, it will override the global value for that key.
 
 ```yaml
 mcMetadata:
@@ -37,6 +39,10 @@ mcMetadata:
   releaseVersion: "v1.1.0"
   owner: "infra"
   gisDomain: ""
+
+mcMetadata:
+  component: "backend"  # Overrides global.mcMetadata.component
+  owner: "3d" # Overrides global.mcMetadata.owner
 ```
 
 ## Validation:
