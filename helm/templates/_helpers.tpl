@@ -1,12 +1,8 @@
 {{/*
-Returns the name from global mcMetadata if exists or from the mcMetadata's values
+Expand the name of the chart.
 */}}
 {{- define "mcMetadata.name" -}}
-    {{- if (hasKey .Values.global.mcMetadata "name") -}}
-        {{- .Values.global.mcMetadata.name -}}
-    {{- else -}}
-        {{- .Values.mcMetadata.name -}}
-    {{- end -}}
+{{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
 {{/*
