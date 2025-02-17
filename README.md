@@ -4,7 +4,7 @@ This Helm chart is maintained by MapColonies.
 It provides predefined labels and annotations through helper templates to streamline the deployment
 of Kubernetes applications.
 
-The `_helpers.tpl` file includes teןאmplates for standard Kubernetes labels, ensuring uniformity across deployments.
+The `_helpers.tpl` file includes templates for standard Kubernetes labels, ensuring uniformity across deployments.
 
 ## Usage:
 To use this package and include the labels in your repository, add the package as a dependency:
@@ -31,14 +31,15 @@ By default, the chart retrieves values from mcMetadata under global, ensuring co
 If a specific value exists outside `global`, it will override the global value for that key.
 
 ```yaml
-mcMetadata:
-  name: "MichalApplication"
-  createdBy: "Michal" 
-  component: "infrastructure"
-  partOf: "Monitoring"
-  releaseVersion: "v1.1.0"
-  owner: "infra"
-  gisDomain: ""
+general:
+  mcMetadata:
+    name: "MichalApplication"
+    createdBy: "Michal" 
+    component: "infrastructure"
+    partOf: "Monitoring"
+    releaseVersion: "v1.1.0"
+    owner: "infra"
+    gisDomain: ""
 
 mcMetadata:
   component: "backend"  # Overrides global.mcMetadata.component
