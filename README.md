@@ -1,13 +1,16 @@
 # mc-labels-and-annotations
 
-This Helm chart is maintained by MapColonies.
-It provides predefined labels and annotations through helper templates to streamline the deployment
-of Kubernetes applications.
+This Helm chart provides MapColonies predefined labels and annotations through helper templates to streamline Kubernetes application deployments.
 
-The `_helpers.tpl` file includes templates for standard Kubernetes labels, ensuring uniformity across deployments.
+## Features
+- Standardized Kubernetes labels and annotations
+- Global and local metadata configuration
+- Built-in validation for metadata values
+- Helm template helpers for easy integration
 
-## Usage:
-To use this package and include the labels in your repository, add the package as a dependency:
+## Installation
+
+Add this chart as a dependency in your `Chart.yaml`:
 
 ```yaml
 dependencies:
@@ -16,7 +19,15 @@ dependencies:
     repository: oci://artifactory.io/helm/infra
 ```
 
-In your Kubernetes manifest templates, reference the helper templates to add labels and annotations:
+Then run:
+```bash
+helm dependency update
+```
+
+## Usage
+
+### Template Integration
+Add the following to your Kubernetes manifest templates:
 
 ```yaml
 metadata:
@@ -26,27 +37,55 @@ metadata:
     {{ include "mc-labels-and-annotations.annotations" . | nindent 4 }}
 ```
 
-To ensure the labels are properly generated, define your metadata values in values.yaml.
-By default, the chart retrieves values from mcMetadata under global, ensuring consistent labeling across deployments.  
-If a specific value exists outside `global`, it will override the global value for that key.
+### Configuration
+Define "mcLabels" in `values.yaml`. Values can be set globally or overridden locally:
 
 ```yaml
-general:
-  mcMetadata:
-    createdBy: "Michal" 
+global:
+  mcLabels:
+    environment: "development"
+    createdBy: "Person"
     component: "infrastructure"
     partOf: "Monitoring"
-    releaseVersion: "v1.1.0"
-    owner: "infra"
-    gisDomain: ""
 
-mcMetadata:
-  component: "backend"  # Overrides global.mcMetadata.component
-  owner: "3d" # Overrides global.mcMetadata.owner
+mcLabels:
+  component: "backend" # Overrides global.mcLabels.component
+  owner: "3d" # Overrides global.mcLabels.owner
 ```
 
-## Validation:
-The chart includes validation logic to ensure that required label values are provided and arein the expected
-formats. For instance, it checks that fields like createdBy and partOf are not empty, and that component 
-matches one of the predefined categories such as "frontend", "backend", or "infrastructure".
-This validation helps maintain consistency and prevents deployment errors due to misconfigured labels.
+### Validation Rules
+
+The chart validates the following metadata fields:
+
+| Field | Required | Valid Values | Notes |
+|----------------|----------|---------------------|----|
+| environment | Yes | development, production,stage | |
+| createdBy | Yes | non-empty string   | The person who deployed it |
+| component | Yes | frontend, backend, database, proxy-server, cache-server, infrastructure | Optional when deploying service |
+| partOf | Yes | non-empty string | |
+| owner | Yes | vector, raster, 3d, app, dem, infra, common | Who is the owner of the deployment |
+| gisDomain | No | vector, raster, 3d, dem, terrain-analysis | To what GIS domain it is related |
+| releaseVersion | No | semantic version (e.g., v1.0.0) | The MapColonies project product version |
+
+## Maintainers
+
+### File Structure
+- `templates/_helpers.tpl`: Contains helper functions for generating labels and annotations.
+- `templates/_setValues.tpl`: Contains functions for merging and setting mcLabels values.
+- `templates/_validations.tpl`: Contains validation functions for mcLabels values.
+
+### Adding New Labels Or Annotations
+1. Add the labels or annotations in `templates/_helpers.tpl`.
+
+### Adding New Validations
+1. Define valid values in `templates/_setValues.tpl`.
+2. Add validation logic in `templates/_validations.tpl`.
+
+### Updating the Chart Version
+1. Update the version in `Chart.yaml`.
+2. Update the version in the `README.md` installation instructions.
+
+### Testing Changes
+1. Make changes to the templates.
+2. Run `helm lint` to validate the chart.
+3. Deploy the chart in a test environment to ensure it works as expected.
