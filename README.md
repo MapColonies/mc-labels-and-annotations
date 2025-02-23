@@ -37,6 +37,15 @@ metadata:
     {{ include "mc-labels-and-annotations.annotations" . | nindent 4 }}
 ```
 
+For service component, use these functions instead:
+```yaml
+metadata:
+  labels:
+    {{ include "mc-labels-and-annotations.serviceLabels" . | nindent 4 }}
+  annotations:
+    {{ include "mc-labels-and-annotations.serviceAnnotations" . | nindent 4 }}
+```
+
 ### Configuration
 Define "mcLabels" in `values.yaml`. Values can be set globally or overridden locally:
 
