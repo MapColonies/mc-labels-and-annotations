@@ -11,14 +11,14 @@ This Helm chart provides MapColonies predefined labels and annotations through h
 ## Installation
 
 Add this chart as a dependency in your `Chart.yaml`:
-
+<!-- x-release-please-start-version -->
 ```yaml
 dependencies:
   - name: mc-labels-and-annotations
     version: 0.1.0
     repository: oci://artifactory.io/helm/infra
 ```
-
+<!-- x-release-please-end-version -->
 Then run:
 ```bash
 helm dependency update
