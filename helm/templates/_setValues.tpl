@@ -18,14 +18,14 @@ Defines valid values for different fields
 {{- end -}}
 
 {{/*
-Merge global and local mcLabels values
+Merge global and local commonLabelsAndAnnotations values
 */}}
-{{- define "mcLabels.merged" -}}
-{{- if not (or .Values.global.mcLabels .Values.mcLabels) -}}
-    {{- fail (printf "There is no mcLabels key (locally or globally)") -}}
+{{- define "commonLabelsAndAnnotations.merged" -}}
+{{- if not (or .Values.global.commonLabelsAndAnnotations .Values.commonLabelsAndAnnotations) -}}
+    {{- fail (printf "There is no commonLabelsAndAnnotations key (locally or globally)") -}}
 {{- end -}}
-{{- $globalMcLabels := default (dict) .Values.global.mcLabels -}}
-{{- $localMcLabels := default (dict) .Values.mcLabels -}}
-{{- $merged := merge $localMcLabels $globalMcLabels -}}
+{{- $globalCommonLabelsAndAnnotations := default (dict) .Values.global.commonLabelsAndAnnotations -}}
+{{- $localCommonLabelsAndAnnotations := default (dict) .Values.commonLabelsAndAnnotations -}}
+{{- $merged := merge $localCommonLabelsAndAnnotations $globalCommonLabelsAndAnnotations -}}
 {{- $merged | toYaml -}}
 {{- end -}}
